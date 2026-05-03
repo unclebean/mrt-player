@@ -229,7 +229,7 @@ const ewlStations = {
   "Redhill": { pt: [840, 990], code: "EW18" },
   "Tiong Bahru": { pt: [900, 1050], code: "EW17" },
   "Outram Park": { pt: [950, 1050], code: "EW16" },
-  "Tanjong Pagar": { pt: [975, 1050], code: "EW15" }, // FIXED: Moved to left of Raffles Place
+  "Tanjong Pagar": { pt: [975, 1050], code: "EW15" },
   "Raffles Place": { pt: [1000, 1050], code: "EW14" }, 
   "City Hall": { pt: [1000, 1000], code: "EW13" },   
   "Bugis": { pt: [1100, 900], code: "EW12" },
@@ -264,6 +264,48 @@ const cglStations = {
 
 const cglLine = buildLine("cgl", "CGL", "var(--ewl-color)", cglCorners, cglStations, 40);
 
-const lines = [ cclLine, nslLine, ewlLine, cglLine ];
+// NEL LOGIC (Purple Line)
+const nelCorners = [
+  pt(-240),      // HarbourFront (NE1/CC29)
+  [950, 1150],   // Approach to Outram Park
+  [950, 1050],   // Outram Park (NE3/EW16)
+  [950, 950],    // Chinatown (NE4)
+  [925, 900],    // Clarke Quay (NE5)
+  [900, 850],    // Dhoby Ghaut (NE6/NS24/CC1)
+  [950, 750],    // Little India (NE7)
+  [1000, 700],   // Farrer Park (NE8)
+  [1100, 600],   // Boon Keng (NE9)
+  [1150, 550],   // Potong Pasir (NE10)
+  [1175, 500],   // Woodleigh (NE11)
+  pt(-60),       // Serangoon (NE12/CC13)
+  [1250, 380],   // Kovan (NE13)
+  [1300, 310],   // Hougang (NE14)
+  [1350, 240],   // Buangkok (NE15)
+  [1400, 170],   // Sengkang (NE16)
+  [1450, 100]    // Punggol (NE17)
+];
+
+const nelStations = {
+  "HarbourFront": { pt: pt(-240), code: "NE1" },
+  "Outram Park": { pt: [950, 1050], code: "NE3" },
+  "Chinatown": { pt: [950, 950], code: "NE4" },
+  "Clarke Quay": { pt: [925, 900], code: "NE5" },
+  "Dhoby Ghaut": { pt: [900, 850], code: "NE6" },
+  "Little India": { pt: [950, 750], code: "NE7" },
+  "Farrer Park": { pt: [1000, 700], code: "NE8" },
+  "Boon Keng": { pt: [1100, 600], code: "NE9" },
+  "Potong Pasir": { pt: [1150, 550], code: "NE10" },
+  "Woodleigh": { pt: [1175, 500], code: "NE11" },
+  "Serangoon": { pt: pt(-60), code: "NE12" },
+  "Kovan": { pt: [1250, 380], code: "NE13" },
+  "Hougang": { pt: [1300, 310], code: "NE14" },
+  "Buangkok": { pt: [1350, 240], code: "NE15" },
+  "Sengkang": { pt: [1400, 170], code: "NE16" },
+  "Punggol": { pt: [1450, 100], code: "NE17" }
+};
+
+const nelLine = buildLine("nel", "NEL", "var(--nel-color)", nelCorners, nelStations, 40);
+
+const lines = [ cclLine, nslLine, ewlLine, cglLine, nelLine ];
 fs.writeFileSync('src/constants.ts', `import type { MrtLine } from './types';\n\nexport const MRT_LINES: MrtLine[] = ${JSON.stringify(lines, null, 2)};\n`, 'utf8');
-console.log("Tanjong Pagar (EW15) position fixed!");
+console.log("Purple Line (NEL) integrated successfully!");
