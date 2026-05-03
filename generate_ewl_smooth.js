@@ -199,14 +199,15 @@ const ewlCorners = [
   [300, 800],    // Chinese Garden (EW25) curve
   [400, 700],    // Jurong East peak (NS1)
   [500, 800],    // Clementi curve
-  [600, 800],    // Buona Vista (CC22)
+  [650, 800],    // Buona Vista (CC22)
   [850, 1050],   // Outram Park curve
   [1000, 1050],  // Raffles Place (NS26)
   [1000, 1000],  // City Hall (NS25)
-  [1200, 800],   // Bugis curve
-  [1400, 800],   // Paya Lebar (CC9)
-  [1700, 800],   // Tanah Merah branching curve (EW4 is at 1600, curve is at 1700)
-  [1850, 650]    // Pasir Ris
+  [1150, 850],    // Bugis curve
+  [1350, 800],    // Paya Lebar (CC9)
+  [1700, 800],    // Tanah Merah split start
+  [1900, 700],    // Diagonal to Vertical turn
+  [1900, 450]     // Pasir Ris (EW1)
 ];
 
 const ewlStations = {
@@ -219,50 +220,50 @@ const ewlStations = {
   "Boon Lay": { pt: [140, 800], code: "EW27" },
   "Lakeside": { pt: [200, 800], code: "EW26" },
   "Chinese Garden": { pt: [260, 800], code: "EW25" },
-  "Jurong East": { pt: [400, 700], code: "EW24" }, // Intersect NS1
+  "Jurong East": { pt: [400, 700], code: "EW24" }, 
   "Clementi": { pt: [460, 760], code: "EW23" },
-  "Dover": { pt: [540, 800], code: "EW22" },
-  "Buona Vista": { pt: [600, 800], code: "EW21" }, // Intersect CC22
-  "Commonwealth": { pt: [660, 860], code: "EW20" },
-  "Queenstown": { pt: [720, 920], code: "EW19" },
-  "Redhill": { pt: [780, 980], code: "EW18" },
-  "Tiong Bahru": { pt: [850, 1050], code: "EW17" },
-  "Outram Park": { pt: [900, 1050], code: "EW16" },
-  "Tanjong Pagar": { pt: [950, 1050], code: "EW15" },
-  "Raffles Place": { pt: [1000, 1050], code: "EW14" }, // Intersect NS26
-  "City Hall": { pt: [1000, 1000], code: "EW13" },   // Intersect NS25
+  "Dover": { pt: [560, 800], code: "EW22" },
+  "Buona Vista": { pt: [650, 800], code: "EW21" }, 
+  "Commonwealth": { pt: [720, 870], code: "EW20" },
+  "Queenstown": { pt: [780, 930], code: "EW19" },
+  "Redhill": { pt: [840, 990], code: "EW18" },
+  "Tiong Bahru": { pt: [900, 1050], code: "EW17" },
+  "Outram Park": { pt: [950, 1050], code: "EW16" },
+  "Tanjong Pagar": { pt: [975, 1050], code: "EW15" }, // FIXED: Moved to left of Raffles Place
+  "Raffles Place": { pt: [1000, 1050], code: "EW14" }, 
+  "City Hall": { pt: [1000, 1000], code: "EW13" },   
   "Bugis": { pt: [1100, 900], code: "EW12" },
-  "Lavender": { pt: [1160, 840], code: "EW11" },
-  "Kallang": { pt: [1230, 800], code: "EW10" },
-  "Aljunied": { pt: [1310, 800], code: "EW9" },
-  "Paya Lebar": { pt: [1400, 800], code: "EW8" },    // Intersect CC9
-  "Eunos": { pt: [1450, 800], code: "EW7" },
-  "Kembangan": { pt: [1500, 800], code: "EW6" },
-  "Bedok": { pt: [1550, 800], code: "EW5" },
-  "Tanah Merah": { pt: [1600, 800], code: "EW4" },   // On the straight segment BEFORE the curve
-  "Simei": { pt: [1750, 750], code: "EW3" },
-  "Tampines": { pt: [1800, 700], code: "EW2" },
-  "Pasir Ris": { pt: [1850, 650], code: "EW1" }
+  "Lavender": { pt: [1180, 820], code: "EW11" },
+  "Kallang": { pt: [1250, 800], code: "EW10" },
+  "Aljunied": { pt: [1300, 800], code: "EW9" },
+  "Paya Lebar": { pt: [1350, 800], code: "EW8" },    
+  "Eunos": { pt: [1400, 800], code: "EW7" },
+  "Kembangan": { pt: [1450, 800], code: "EW6" },
+  "Bedok": { pt: [1500, 800], code: "EW5" },
+  "Tanah Merah": { pt: [1700, 800], code: "EW4" },   
+  "Simei": { pt: [1800, 750], code: "EW3" },         
+  "Tampines": { pt: [1900, 600], code: "EW2" },      
+  "Pasir Ris": { pt: [1900, 450], code: "EW1" }       
 };
 
 const ewlLine = buildLine("ewl", "EWL", "var(--ewl-color)", ewlCorners, ewlStations, 40);
 
 // CGL LOGIC (Changi Branch)
-// Starts directly from Tanah Merah on the exact same horizontal plane, then hits the corner down to Expo
 const cglCorners = [
-  [1600, 800],  // Tanah Merah start
-  [1700, 800],  // Branching curve
-  [1850, 950]   // Changi Airport
+  [1700, 800],  // Tanah Merah start
+  [1750, 800],  // Branching curve start
+  [1850, 900],  // Diagonal to Horizontal turn
+  [2150, 900]   // Changi Airport (CG2)
 ];
 
 const cglStations = {
-  "Tanah Merah": { pt: [1600, 800], code: "" }, // Already EW4, but need it on the line
-  "Expo": { pt: [1775, 875], code: "CG1" },
-  "Changi Airport": { pt: [1850, 950], code: "CG2" }
+  "Tanah Merah": { pt: [1700, 800], code: "" },
+  "Expo": { pt: [1950, 900], code: "CG1" },
+  "Changi Airport": { pt: [2150, 900], code: "CG2" }
 };
 
 const cglLine = buildLine("cgl", "CGL", "var(--ewl-color)", cglCorners, cglStations, 40);
 
 const lines = [ cclLine, nslLine, ewlLine, cglLine ];
 fs.writeFileSync('src/constants.ts', `import type { MrtLine } from './types';\n\nexport const MRT_LINES: MrtLine[] = ${JSON.stringify(lines, null, 2)};\n`, 'utf8');
-console.log("EWL East branching corrected for smooth corners!");
+console.log("Tanjong Pagar (EW15) position fixed!");

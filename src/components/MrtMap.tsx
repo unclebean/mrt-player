@@ -91,7 +91,7 @@ export const MrtMap: React.FC<MrtMapProps> = ({ trains }) => {
     >
       <svg 
         className="mrt-map" 
-        viewBox="-1100 0 3000 1600" 
+        viewBox="-800 0 3500 1600" 
         preserveAspectRatio="xMidYMid meet"
         style={{ transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`, transformOrigin: 'center' }}
       >
