@@ -60,6 +60,14 @@ svg.mrt-map {
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.05));
 }
 
+svg.mrt-map path {
+  fill: none;
+  stroke-width: 8;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: stroke 0.3s ease;
+}
+
 .line-path {
   fill: none;
   stroke-width: 8;
@@ -118,9 +126,11 @@ svg.mrt-map {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0; /* Allow shrinking */
 }
 
 .line-badge {
+  flex-shrink: 0;
   width: 32px;
   height: 24px;
   border-radius: 4px;
@@ -135,6 +145,9 @@ svg.mrt-map {
 .line-name {
   font-size: 0.875rem;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .control-buttons {

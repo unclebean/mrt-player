@@ -91,7 +91,7 @@ export const MrtMap: React.FC<MrtMapProps> = ({ trains }) => {
     >
       <svg 
         className="mrt-map" 
-        viewBox="100 50 1800 1350" 
+        viewBox="-1100 0 3000 1600" 
         preserveAspectRatio="xMidYMid meet"
         style={{ transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`, transformOrigin: 'center' }}
       >
@@ -106,36 +106,59 @@ export const MrtMap: React.FC<MrtMapProps> = ({ trains }) => {
           />
         ))}
 
-        {/* Draw Stations and Names */}
-        {MRT_LINES.map(line => {
-          const pathEl = pathRefs.current[line.id];
-          if (!pathEl) return null;
+        {/* Draw Stations and Names (De-duplicated) */}
+        {(() => {
+          const uniqueStations: Record<string, { x: number, y: number, colors: string[], codes: string[] }> = {};
           
-          const length = pathEl.getTotalLength();
-          if (length === 0) return null;
+          MRT_LINES.forEach(line => {
+            const pathEl = pathRefs.current[line.id];
+            if (!pathEl) return;
+            const length = pathEl.getTotalLength();
+            if (length === 0) return;
 
-          return line.stations.map(station => {
-            const pt = pathEl.getPointAtLength(station.progress * length);
-            return (
-              <g key={`${line.id}-${station.name}`}>
-                <circle
-                  cx={pt.x}
-                  cy={pt.y}
-                  r="5"
-                  className="station-node"
-                  stroke={line.colorVar}
-                />
-                <text
-                  x={pt.x + 10}
-                  y={pt.y + 4}
-                  className="station-name"
-                >
-                  {station.name}
-                </text>
-              </g>
-            );
+            line.stations.forEach(station => {
+              const pt = pathEl.getPointAtLength(station.progress * length);
+              if (!uniqueStations[station.name]) {
+                uniqueStations[station.name] = { x: pt.x, y: pt.y, colors: [line.colorVar], codes: [station.code] };
+              } else {
+                if (!uniqueStations[station.name].colors.includes(line.colorVar)) {
+                  uniqueStations[station.name].colors.push(line.colorVar);
+                  if (station.code) uniqueStations[station.name].codes.push(station.code);
+                }
+              }
+            });
           });
-        })}
+
+          return Object.entries(uniqueStations).map(([name, data]) => (
+            <g key={`station-${name}`}>
+              <circle
+                cx={data.x}
+                cy={data.y}
+                r="5"
+                className="station-node"
+                style={{ stroke: data.colors[0], fill: data.colors.length > 1 ? '#fff' : undefined }}
+              />
+              {data.colors.length > 1 && data.colors.slice(1).map((color, idx) => (
+                <circle
+                  key={idx}
+                  cx={data.x}
+                  cy={data.y}
+                  r={5 + (idx + 1) * 2}
+                  fill="none"
+                  stroke={color}
+                  strokeWidth="1.5"
+                />
+              ))}
+              <text
+                x={data.x + 10 + (data.colors.length - 1) * 2}
+                y={data.y + 4}
+                className="station-name"
+              >
+                {data.codes.join(' ')}
+              </text>
+            </g>
+          ));
+        })()}
 
         {/* Draw Trains */}
         {trains.map(train => {

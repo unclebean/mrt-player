@@ -2,6 +2,7 @@ export type LineId = 'nsl' | 'ewl' | 'nel' | 'ccl' | 'dtl' | 'tel';
 
 export interface Station {
   name: string;
+  code: string;
   progress: number;
 }
 

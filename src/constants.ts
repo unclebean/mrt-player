@@ -2,108 +2,528 @@ import type { MrtLine } from './types';
 
 export const MRT_LINES: MrtLine[] = [
   {
-    id: 'nsl',
-    name: 'North-South Line',
-    code: 'NSL',
-    colorVar: 'var(--nsl-color)',
-    path: 'M 400 700 L 400 350 L 550 200 L 850 200 L 1050 400 L 1050 800 L 950 900 L 1050 1000 L 1100 1050 L 1050 1100 L 1050 1350',
-    length: 2219,
-    stations: [
-      { name: 'Jurong East', progress: 0.0000 },
-      { name: 'Woodlands', progress: 0.2533 },
-      { name: 'Bishan', progress: 0.5159 },
-      { name: 'Newton', progress: 0.6736 },
-      { name: 'Orchard', progress: 0.7599 },
-      { name: 'Dhoby Ghaut', progress: 0.8236 },
-      { name: 'City Hall', progress: 0.8555 },
-      { name: 'Raffles Place', progress: 0.8873 },
-      { name: 'Marina Bay', progress: 0.9549 },
-      { name: 'Marina South Pier', progress: 1.0000 }
+    "id": "ccl",
+    "name": "CCL",
+    "code": "CCL",
+    "colorVar": "var(--ccl-color)",
+    "path": "M 900.0 850.0 L 1000.0 950.0 L 1100.0 1050.0 L 1200.0 1146.4 L 1212.0 1139.2 L 1223.7 1131.6 L 1235.1 1123.6 L 1246.3 1115.2 L 1257.1 1106.4 L 1267.7 1097.3 L 1277.9 1087.7 L 1287.7 1077.9 L 1297.3 1067.7 L 1306.4 1057.1 L 1315.2 1046.3 L 1323.6 1035.1 L 1331.6 1023.7 L 1339.2 1012.0 L 1346.4 1000.0 L 1353.2 987.8 L 1359.5 975.3 L 1365.4 962.7 L 1370.9 949.8 L 1375.9 936.8 L 1380.4 923.6 L 1384.5 910.3 L 1388.1 896.8 L 1391.3 883.2 L 1393.9 869.5 L 1396.1 855.7 L 1397.8 841.8 L 1399.0 827.9 L 1399.8 814.0 L 1400.0 800.0 L 1399.8 786.0 L 1399.0 772.1 L 1397.8 758.2 L 1396.1 744.3 L 1393.9 730.5 L 1391.3 716.8 L 1388.1 703.2 L 1384.5 689.7 L 1380.4 676.4 L 1375.9 663.2 L 1370.9 650.2 L 1365.4 637.3 L 1359.5 624.7 L 1353.2 612.2 L 1346.4 600.0 L 1339.2 588.0 L 1331.6 576.3 L 1323.6 564.9 L 1315.2 553.7 L 1306.4 542.9 L 1297.3 532.3 L 1287.7 522.1 L 1277.9 512.3 L 1267.7 502.7 L 1257.1 493.6 L 1246.3 484.8 L 1235.1 476.4 L 1223.7 468.4 L 1212.0 460.8 L 1200.0 453.6 L 1187.8 446.8 L 1175.3 440.5 L 1162.7 434.6 L 1149.8 429.1 L 1136.8 424.1 L 1123.6 419.6 L 1110.3 415.5 L 1096.8 411.9 L 1083.2 408.7 L 1069.5 406.1 L 1055.7 403.9 L 1041.8 402.2 L 1027.9 401.0 L 1014.0 400.2 L 1000.0 400.0 L 986.0 400.2 L 972.1 401.0 L 958.2 402.2 L 944.3 403.9 L 930.5 406.1 L 916.8 408.7 L 903.2 411.9 L 889.7 415.5 L 876.4 419.6 L 863.2 424.1 L 850.2 429.1 L 837.3 434.6 L 824.7 440.5 L 812.2 446.8 L 800.0 453.6 L 788.0 460.8 L 776.3 468.4 L 764.9 476.4 L 753.7 484.8 L 742.9 493.6 L 732.3 502.7 L 722.1 512.3 L 712.3 522.1 L 702.7 532.3 L 693.6 542.9 L 684.8 553.7 L 676.4 564.9 L 668.4 576.3 L 660.8 588.0 L 653.6 600.0 L 646.8 612.2 L 640.5 624.7 L 634.6 637.3 L 629.1 650.2 L 624.1 663.2 L 619.6 676.4 L 615.5 689.7 L 611.9 703.2 L 608.7 716.8 L 606.1 730.5 L 603.9 744.3 L 602.2 758.2 L 601.0 772.1 L 600.2 786.0 L 600.0 800.0 L 600.2 814.0 L 601.0 827.9 L 602.2 841.8 L 603.9 855.7 L 606.1 869.5 L 608.7 883.2 L 611.9 896.8 L 615.5 910.3 L 619.6 923.6 L 624.1 936.8 L 629.1 949.8 L 634.6 962.7 L 640.5 975.3 L 646.8 987.8 L 653.6 1000.0 L 660.8 1012.0 L 668.4 1023.7 L 676.4 1035.1 L 684.8 1046.3 L 693.6 1057.1 L 702.7 1067.7 L 712.3 1077.9 L 722.1 1087.7 L 732.3 1097.3 L 742.9 1106.4 L 753.7 1115.2 L 764.9 1123.6 L 776.3 1131.6 L 788.0 1139.2 L 800.0 1146.4 L 812.2 1153.2 L 824.7 1159.5 L 837.3 1165.4 L 850.2 1170.9 L 863.2 1175.9 L 876.4 1180.4 L 889.7 1184.5 L 903.2 1188.1 L 916.8 1191.3 L 930.5 1193.9 L 944.3 1196.1 L 958.2 1197.8 L 972.1 1199.0 L 986.0 1199.8 L 1000.0 1200.0 L 1014.0 1199.8 L 1027.9 1199.0 L 1041.8 1197.8 L 1055.7 1196.1 L 1069.5 1193.9 L 1083.2 1191.3 L 1096.8 1188.1 L 1110.3 1184.5 L 1123.6 1180.4 L 1136.8 1175.9 L 1149.8 1170.9 L 1162.7 1165.4 L 1175.3 1159.5 L 1187.8 1153.2 L 1200.0 1146.4",
+    "length": 2935,
+    "stations": [
+      {
+        "name": "Dhoby Ghaut",
+        "code": "CC1",
+        "progress": 0
+      },
+      {
+        "name": "Bras Basah",
+        "code": "CC2",
+        "progress": 0.048186165891450326
+      },
+      {
+        "name": "Esplanade",
+        "code": "CC3",
+        "progress": 0.09637233178290065
+      },
+      {
+        "name": "Promenade",
+        "code": "CC4",
+        "progress": 0.14370149827417678
+      },
+      {
+        "name": "Promenade",
+        "code": "CC4",
+        "progress": 0.14370149827417678
+      },
+      {
+        "name": "Nicoll Highway",
+        "code": "CC5",
+        "progress": 0.17224478166503754
+      },
+      {
+        "name": "Stadium",
+        "code": "CC6",
+        "progress": 0.20078806505589838
+      },
+      {
+        "name": "Mountbatten",
+        "code": "CC7",
+        "progress": 0.22933134844675918
+      },
+      {
+        "name": "Dakota",
+        "code": "CC8",
+        "progress": 0.25787463183761994
+      },
+      {
+        "name": "Paya Lebar",
+        "code": "CC9",
+        "progress": 0.2864179152284807
+      },
+      {
+        "name": "MacPherson",
+        "code": "CC10",
+        "progress": 0.3220970194670567
+      },
+      {
+        "name": "Tai Seng",
+        "code": "CC11",
+        "progress": 0.35777612370563266
+      },
+      {
+        "name": "Bartley",
+        "code": "CC12",
+        "progress": 0.3934552279442088
+      },
+      {
+        "name": "Serangoon",
+        "code": "CC13",
+        "progress": 0.42913433218278474
+      },
+      {
+        "name": "Lorong Chuan",
+        "code": "CC14",
+        "progress": 0.46481343642136075
+      },
+      {
+        "name": "Bishan",
+        "code": "CC15",
+        "progress": 0.5004925406599366
+      },
+      {
+        "name": "Marymount",
+        "code": "CC16",
+        "progress": 0.5361716448985127
+      },
+      {
+        "name": "Caldecott",
+        "code": "CC17",
+        "progress": 0.5718507491370887
+      },
+      {
+        "name": "Botanic Gardens",
+        "code": "CC19",
+        "progress": 0.6075298533756647
+      },
+      {
+        "name": "Farrer Road",
+        "code": "CC20",
+        "progress": 0.6432089576142408
+      },
+      {
+        "name": "Holland Village",
+        "code": "CC21",
+        "progress": 0.6788880618528167
+      },
+      {
+        "name": "Buona Vista",
+        "code": "CC22",
+        "progress": 0.7145671660913927
+      },
+      {
+        "name": "one-north",
+        "code": "CC23",
+        "progress": 0.7349551834062155
+      },
+      {
+        "name": "Kent Ridge",
+        "code": "CC24",
+        "progress": 0.7553433021212671
+      },
+      {
+        "name": "Haw Par Villa",
+        "code": "CC25",
+        "progress": 0.7757313870359621
+      },
+      {
+        "name": "Pasir Panjang",
+        "code": "CC26",
+        "progress": 0.7961193621011271
+      },
+      {
+        "name": "Labrador Park",
+        "code": "CC27",
+        "progress": 0.816507447015822
+      },
+      {
+        "name": "Telok Blangah",
+        "code": "CC28",
+        "progress": 0.8368955657308736
+      },
+      {
+        "name": "HarbourFront",
+        "code": "CC29",
+        "progress": 0.8572835830456964
+      },
+      {
+        "name": "Keppel",
+        "code": "CC30",
+        "progress": 0.875123180451741
+      },
+      {
+        "name": "Cantonment",
+        "code": "CC31",
+        "progress": 0.8929626872842725
+      },
+      {
+        "name": "Prince Edward Road",
+        "code": "CC32",
+        "progress": 0.910802194116804
+      },
+      {
+        "name": "Marina Bay",
+        "code": "CC33",
+        "progress": 0.9286417915228483
+      },
+      {
+        "name": "Bayfront",
+        "code": "CC34",
+        "progress": 0.9643208957614242
+      }
     ]
   },
   {
-    id: 'ewl',
-    name: 'East-West Line',
-    code: 'EWL',
-    colorVar: 'var(--ewl-color)',
-    path: 'M 200 700 L 400 700 L 700 1000 L 800 1100 L 1050 1100 L 1100 1050 L 1200 950 L 1500 950 L 1800 650',
-    length: 1952,
-    stations: [
-      { name: 'Tuas Link', progress: 0.0000 },
-      { name: 'Jurong East', progress: 0.1025 },
-      { name: 'Buona Vista', progress: 0.3198 },
-      { name: 'Outram Park', progress: 0.4691 },
-      { name: 'Raffles Place', progress: 0.5203 },
-      { name: 'City Hall', progress: 0.5565 },
-      { name: 'Bugis', progress: 0.6290 },
-      { name: 'Paya Lebar', progress: 0.7827 },
-      { name: 'Pasir Ris', progress: 1.0000 }
+    "id": "nsl",
+    "name": "NSL",
+    "code": "NSL",
+    "colorVar": "var(--nsl-color)",
+    "path": "M 400.0 700.0 L 400.0 240.0 L 400.3 232.1 L 401.1 224.5 L 402.5 217.1 L 404.5 209.9 L 407.1 202.9 L 410.2 196.2 L 413.9 189.7 L 418.1 183.5 L 422.9 177.5 L 428.3 171.7 L 471.7 128.3 L 477.5 122.9 L 483.5 118.1 L 489.7 113.9 L 496.2 110.2 L 502.9 107.1 L 509.9 104.5 L 517.1 102.5 L 524.5 101.1 L 532.1 100.3 L 540.0 100.0 L 860.0 100.0 L 867.9 100.3 L 875.5 101.1 L 882.9 102.5 L 890.1 104.5 L 897.1 107.1 L 903.8 110.2 L 910.3 113.9 L 916.5 118.1 L 922.5 122.9 L 928.3 128.3 L 971.7 171.7 L 977.1 177.5 L 981.9 183.5 L 986.1 189.7 L 989.8 196.2 L 992.9 202.9 L 995.5 209.9 L 997.5 217.1 L 998.9 224.5 L 999.7 232.1 L 1000.0 240.0 L 1000.0 460.0 L 999.7 467.9 L 998.9 475.5 L 997.5 482.9 L 995.5 490.1 L 992.9 497.1 L 989.8 503.8 L 986.1 510.3 L 981.9 516.5 L 977.1 522.5 L 971.7 528.3 L 878.3 621.7 L 872.9 627.5 L 868.1 633.5 L 863.9 639.7 L 860.2 646.2 L 857.1 652.9 L 854.5 659.9 L 852.5 667.1 L 851.1 674.5 L 850.3 682.1 L 850.0 690.0 L 850.0 760.0 L 850.3 767.9 L 851.1 775.5 L 852.5 782.9 L 854.5 790.1 L 857.1 797.1 L 860.2 803.8 L 863.9 810.3 L 868.1 816.5 L 872.9 822.5 L 878.3 828.3 L 971.7 921.7 L 977.1 927.5 L 981.9 933.5 L 986.1 939.7 L 989.8 946.2 L 992.9 952.9 L 995.5 959.9 L 997.5 967.1 L 998.9 974.5 L 999.7 982.1 L 1000.0 990.0 L 1000.0 1250.0",
+    "length": 2325,
+    "stations": [
+      {
+        "name": "Jurong East",
+        "code": "NS1",
+        "progress": 0
+      },
+      {
+        "name": "Bukit Batok",
+        "code": "NS2",
+        "progress": 0.034412584902366664
+      },
+      {
+        "name": "Bukit Gombak",
+        "code": "NS3",
+        "progress": 0.06882516980473333
+      },
+      {
+        "name": "Choa Chu Kang",
+        "code": "NS4",
+        "progress": 0.10323775470709999
+      },
+      {
+        "name": "Yew Tee",
+        "code": "NS5",
+        "progress": 0.13765033960946665
+      },
+      {
+        "name": "Kranji",
+        "code": "NS7",
+        "progress": 0.1720629245118333
+      },
+      {
+        "name": "Marsiling",
+        "code": "NS8",
+        "progress": 0.24375453139380837
+      },
+      {
+        "name": "Woodlands",
+        "code": "NS9",
+        "progress": 0.29393827271180434
+      },
+      {
+        "name": "Admiralty",
+        "code": "NS10",
+        "progress": 0.328350857614171
+      },
+      {
+        "name": "Sembawang",
+        "code": "NS11",
+        "progress": 0.36276344251653764
+      },
+      {
+        "name": "Canberra",
+        "code": "NS12",
+        "progress": 0.39717602741890434
+      },
+      {
+        "name": "Yishun",
+        "code": "NS13",
+        "progress": 0.4315718257797737
+      },
+      {
+        "name": "Khatib",
+        "code": "NS14",
+        "progress": 0.4731692074136753
+      },
+      {
+        "name": "Yio Chu Kang",
+        "code": "NS15",
+        "progress": 0.5233529487316714
+      },
+      {
+        "name": "Ang Mo Kio",
+        "code": "NS16",
+        "progress": 0.5534639605212422
+      },
+      {
+        "name": "Bishan",
+        "code": "NS17",
+        "progress": 0.5878765454236089
+      },
+      {
+        "name": "Braddell",
+        "code": "NS18",
+        "progress": 0.6050828378747922
+      },
+      {
+        "name": "Toa Payoh",
+        "code": "NS19",
+        "progress": 0.6179707706716824
+      },
+      {
+        "name": "Novena",
+        "code": "NS20",
+        "progress": 0.6300218568394372
+      },
+      {
+        "name": "Newton",
+        "code": "NS21",
+        "progress": 0.6747765098947222
+      },
+      {
+        "name": "Orchard",
+        "code": "NS22",
+        "progress": 0.7401686088018563
+      },
+      {
+        "name": "Somerset",
+        "code": "NS23",
+        "progress": 0.7616764743658354
+      },
+      {
+        "name": "Dhoby Ghaut",
+        "code": "NS24",
+        "progress": 0.8118602156838315
+      },
+      {
+        "name": "City Hall",
+        "code": "NS25",
+        "progress": 0.8924606721801042
+      },
+      {
+        "name": "Raffles Place",
+        "code": "NS26",
+        "progress": 0.9139685377440834
+      },
+      {
+        "name": "Marina Bay",
+        "code": "NS27",
+        "progress": 0.9784921344360208
+      },
+      {
+        "name": "Marina South Pier",
+        "code": "NS28",
+        "progress": 1
+      }
     ]
   },
   {
-    id: 'nel',
-    name: 'North East Line',
-    code: 'NEL',
-    colorVar: 'var(--nel-color)',
-    path: 'M 1550 500 L 1250 800 L 1050 1000 L 950 1100 L 850 1200',
-    length: 990,
-    stations: [
-      { name: 'Punggol', progress: 0.0000 },
-      { name: 'Serangoon', progress: 0.4286 },
-      { name: 'Dhoby Ghaut', progress: 0.7143 },
-      { name: 'Outram Park', progress: 0.8571 },
-      { name: 'HarbourFront', progress: 1.0000 }
+    "id": "ewl",
+    "name": "EWL",
+    "code": "EWL",
+    "colorVar": "var(--ewl-color)",
+    "path": "M 80.0 400.0 L 80.0 760.0 L 80.4 767.6 L 81.6 774.4 L 83.6 780.4 L 86.4 785.6 L 90.0 790.0 L 94.4 793.6 L 99.6 796.4 L 105.6 798.4 L 112.4 799.6 L 120.0 800.0 L 260.0 800.0 L 267.9 799.7 L 275.5 798.9 L 282.9 797.5 L 290.1 795.5 L 297.1 792.9 L 303.8 789.8 L 310.3 786.1 L 316.5 781.9 L 322.5 777.1 L 328.3 771.7 L 371.7 728.3 L 377.4 723.2 L 383.0 719.2 L 388.7 716.4 L 394.3 714.7 L 400.0 714.1 L 405.7 714.7 L 411.3 716.4 L 417.0 719.2 L 422.6 723.2 L 428.3 728.3 L 471.7 771.7 L 477.5 777.1 L 483.5 781.9 L 489.7 786.1 L 496.2 789.8 L 502.9 792.9 L 509.9 795.5 L 517.1 797.5 L 524.5 798.9 L 532.1 799.7 L 540.0 800.0 L 560.0 800.0 L 567.9 800.3 L 575.5 801.1 L 582.9 802.5 L 590.1 804.5 L 597.1 807.1 L 603.8 810.2 L 610.3 813.9 L 616.5 818.1 L 622.5 822.9 L 628.3 828.3 L 821.7 1021.7 L 827.5 1027.1 L 833.5 1031.9 L 839.7 1036.1 L 846.2 1039.8 L 852.9 1042.9 L 859.9 1045.5 L 867.1 1047.5 L 874.5 1048.9 L 882.1 1049.7 L 890.0 1050.0 L 976.2 1050.0 L 980.7 1049.8 L 984.8 1049.0 L 988.3 1047.9 L 991.4 1046.2 L 994.0 1044.0 L 996.2 1041.4 L 997.9 1038.3 L 999.0 1034.8 L 999.8 1030.7 L 1000.0 1026.2 L 1000.0 1023.8 L 1000.2 1019.1 L 1000.7 1014.6 L 1001.5 1010.2 L 1002.7 1005.9 L 1004.2 1001.7 L 1006.1 997.7 L 1008.2 993.9 L 1010.8 990.2 L 1013.6 986.6 L 1016.8 983.2 L 1171.7 828.3 L 1177.5 822.9 L 1183.5 818.1 L 1189.7 813.9 L 1196.2 810.2 L 1202.9 807.1 L 1209.9 804.5 L 1217.1 802.5 L 1224.5 801.1 L 1232.1 800.3 L 1240.0 800.0 L 1360.0 800.0 L 1368.0 800.0 L 1376.0 800.0 L 1384.0 800.0 L 1392.0 800.0 L 1400.0 800.0 L 1408.0 800.0 L 1416.0 800.0 L 1424.0 800.0 L 1432.0 800.0 L 1440.0 800.0 L 1660.0 800.0 L 1667.9 799.7 L 1675.5 798.9 L 1682.9 797.5 L 1690.1 795.5 L 1697.1 792.9 L 1703.8 789.8 L 1710.3 786.1 L 1716.5 781.9 L 1722.5 777.1 L 1728.3 771.7 L 1850.0 650.0",
+    "length": 2485,
+    "stations": [
+      {
+        "name": "Tuas Link",
+        "code": "EW33",
+        "progress": 0
+      },
+      {
+        "name": "Tuas West Road",
+        "code": "EW32",
+        "progress": 0.032188054763943916
+      },
+      {
+        "name": "Tuas Crescent",
+        "code": "EW31",
+        "progress": 0.06437610952788783
+      },
+      {
+        "name": "Gul Circle",
+        "code": "EW30",
+        "progress": 0.09656416429183175
+      },
+      {
+        "name": "Joo Koon",
+        "code": "EW29",
+        "progress": 0.12875221905577566
+      },
+      {
+        "name": "Pioneer",
+        "code": "EW28",
+        "progress": 0.1578949387600406
+      },
+      {
+        "name": "Boon Lay",
+        "code": "EW27",
+        "progress": 0.17899064477331958
+      },
+      {
+        "name": "Lakeside",
+        "code": "EW26",
+        "progress": 0.20313168584627753
+      },
+      {
+        "name": "Chinese Garden",
+        "code": "EW25",
+        "progress": 0.22727272691923547
+      },
+      {
+        "name": "Jurong East",
+        "code": "EW24",
+        "progress": 0.2955940922612522
+      },
+      {
+        "name": "Clementi",
+        "code": "EW23",
+        "progress": 0.32668934489675633
+      },
+      {
+        "name": "Dover",
+        "code": "EW22",
+        "progress": 0.363915457603269
+      },
+      {
+        "name": "Buona Vista",
+        "code": "EW21",
+        "progress": 0.38724234544010305
+      },
+      {
+        "name": "Commonwealth",
+        "code": "EW20",
+        "progress": 0.4205687798991621
+      },
+      {
+        "name": "Queenstown",
+        "code": "EW19",
+        "progress": 0.45470936759434516
+      },
+      {
+        "name": "Redhill",
+        "code": "EW18",
+        "progress": 0.4888499552895282
+      },
+      {
+        "name": "Tiong Bahru",
+        "code": "EW17",
+        "progress": 0.5278664876977843
+      },
+      {
+        "name": "Outram Park",
+        "code": "EW16",
+        "progress": 0.5471698686891254
+      },
+      {
+        "name": "Tanjong Pagar",
+        "code": "EW15",
+        "progress": 0.5672874029165904
+      },
+      {
+        "name": "Raffles Place",
+        "code": "EW14",
+        "progress": 0.5855922377037701
+      },
+      {
+        "name": "City Hall",
+        "code": "EW13",
+        "progress": 0.6034124574694477
+      },
+      {
+        "name": "Bugis",
+        "code": "EW12",
+        "progress": 0.6598288219399171
+      },
+      {
+        "name": "Lavender",
+        "code": "EW11",
+        "progress": 0.6939694096351001
+      },
+      {
+        "name": "Kallang",
+        "code": "EW10",
+        "progress": 0.7271877169064774
+      },
+      {
+        "name": "Aljunied",
+        "code": "EW9",
+        "progress": 0.7593600702600638
+      },
+      {
+        "name": "Paya Lebar",
+        "code": "EW8",
+        "progress": 0.7955716318695008
+      },
+      {
+        "name": "Eunos",
+        "code": "EW7",
+        "progress": 0.8156891660969657
+      },
+      {
+        "name": "Kembangan",
+        "code": "EW6",
+        "progress": 0.8358067003244306
+      },
+      {
+        "name": "Bedok",
+        "code": "EW5",
+        "progress": 0.8559242345518956
+      },
+      {
+        "name": "Tanah Merah",
+        "code": "EW4",
+        "progress": 0.8760417687793606
+      },
+      {
+        "name": "Simei",
+        "code": "EW3",
+        "progress": 0.9430990205080283
+      },
+      {
+        "name": "Tampines",
+        "code": "EW2",
+        "progress": 0.971549510254014
+      },
+      {
+        "name": "Pasir Ris",
+        "code": "EW1",
+        "progress": 1
+      }
     ]
   },
   {
-    id: 'ccl',
-    name: 'Circle Line',
-    code: 'CCL',
-    colorVar: 'var(--ccl-color)',
-    path: 'M 1050 1000 L 1150 1000 L 1250 1100 L 1450 1100 L 1500 1050 L 1500 800 L 1250 800 L 1050 600 L 1050 400 L 950 400 L 700 650 L 700 1050 L 850 1200',
-    length: 2561,
-    stations: [
-      { name: 'Dhoby Ghaut', progress: 0.0000 },
-      { name: 'Paya Lebar', progress: 0.2391 },
-      { name: 'MacPherson', progress: 0.2976 },
-      { name: 'Serangoon', progress: 0.3953 },
-      { name: 'Bishan', progress: 0.5838 },
-      { name: 'Botanic Gardens', progress: 0.7609 },
-      { name: 'Buona Vista', progress: 0.8976 },
-      { name: 'HarbourFront', progress: 1.0000 }
-    ]
-  },
-  {
-    id: 'dtl',
-    name: 'Downtown Line',
-    code: 'DTL',
-    colorVar: 'var(--dtl-color)',
-    path: 'M 500 450 L 700 650 L 850 650 L 1050 850 L 1150 850 L 1200 900 L 1200 1050 L 1100 1150 L 1150 1150 L 1500 800 L 1700 800 L 1800 900',
-    length: 2064,
-    stations: [
-      { name: 'Bukit Panjang', progress: 0.0000 },
-      { name: 'Botanic Gardens', progress: 0.1370 },
-      { name: 'Newton', progress: 0.3467 },
-      { name: 'Bugis', progress: 0.4536 },
-      { name: 'Bayfront', progress: 0.5706 },
-      { name: 'MacPherson', progress: 0.8346 },
-      { name: 'Expo', progress: 1.0000 }
-    ]
-  },
-  {
-    id: 'tel',
-    name: 'Thomson-East Coast Line',
-    code: 'TEL',
-    colorVar: 'var(--tel-color)',
-    path: 'M 550 100 L 550 300 L 850 600 L 850 800 L 950 900 L 950 1150 L 1050 1250',
-    length: 1357,
-    stations: [
-      { name: 'Woodlands North', progress: 0.0000 },
-      { name: 'Woodlands', progress: 0.0737 },
-      { name: 'Caldecott', progress: 0.5705 },
-      { name: 'Orchard', progress: 0.7116 },
-      { name: 'Outram Park', progress: 0.8589 },
-      { name: 'Marina Bay', progress: 1.0000 }
+    "id": "cgl",
+    "name": "CGL",
+    "code": "CGL",
+    "colorVar": "var(--ewl-color)",
+    "path": "M 1600.0 800.0 L 1660.0 800.0 L 1667.9 800.3 L 1675.5 801.1 L 1682.9 802.5 L 1690.1 804.5 L 1697.1 807.1 L 1703.8 810.2 L 1710.3 813.9 L 1716.5 818.1 L 1722.5 822.9 L 1728.3 828.3 L 1850.0 950.0",
+    "length": 308,
+    "stations": [
+      {
+        "name": "Tanah Merah",
+        "code": "",
+        "progress": 0
+      },
+      {
+        "name": "Expo",
+        "code": "CG1",
+        "progress": 0.6557248824967652
+      },
+      {
+        "name": "Changi Airport",
+        "code": "CG2",
+        "progress": 1
+      }
     ]
   }
 ];
