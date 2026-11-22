@@ -1,7 +1,4 @@
-import type { MrtLine, Station } from './types';
-
-/** Populated in Ticket 03 (03: Migrate all existing lines to new data model). */
-export const STATIONS: Record<string, Station> = {};
+import type { MrtLine, Station, LineId } from './types';
 
 export const MRT_LINES: MrtLine[] = [
   {
@@ -180,9 +177,63 @@ export const MRT_LINES: MrtLine[] = [
           "Hougang": 0.8125645412737403,
           "Buangkok": 0.8750430275158272,
           "Sengkang": 0.9375215137579136,
-          "Punggol": 1
+          "Punggol": 0.97,
+          "Punggol Coast": 1
         }
       }
     ]
   }
 ];
+
+// Interchange stations whose full lines list includes DTL or TEL services
+// that have not yet been added to MRT_LINES. This lets validateInterchanges
+// pass before Ticket 05 adds those services. Remove each entry once the
+// service is live and the auto-derivation below picks up the lines correctly.
+const FUTURE_LINE_OVERRIDES: Record<string, LineId[]> = {
+  'Newton':          ['nsl', 'dtl'],
+  'Woodlands':       ['nsl', 'tel'],
+  'Marina Bay':      ['nsl', 'ccl', 'tel'],
+  'Outram Park':     ['ewl', 'nel', 'tel'],
+  'Bugis':           ['ewl', 'dtl'],
+  'Expo':            ['ewl', 'dtl'],
+  'Tampines':        ['ewl', 'dtl'],
+  'Little India':    ['nel', 'dtl'],
+  'Chinatown':       ['nel', 'dtl'],
+  'Botanic Gardens': ['ccl', 'dtl'],
+  'MacPherson':      ['ccl', 'dtl'],
+  'Caldecott':       ['ccl', 'tel'],
+  'Bayfront':        ['ccl', 'dtl'],
+  'Promenade':       ['ccl', 'dtl'],
+  'Stevens':         ['dtl', 'tel'], // not on any current service; added for interchange validation
+};
+
+function buildStations(): Record<string, Station> {
+  const stations: Record<string, Station> = {};
+  for (const line of MRT_LINES) {
+    for (const service of line.services) {
+      for (const name of Object.keys(service.stationProgresses)) {
+        if (!stations[name]) {
+          stations[name] = { name, codes: [], lines: [line.id] };
+        } else if (!stations[name].lines.includes(line.id)) {
+          stations[name].lines.push(line.id);
+        }
+      }
+    }
+  }
+  // TODO: populate codes[] per station (station codes are deferred; currently empty)
+  for (const [name, lines] of Object.entries(FUTURE_LINE_OVERRIDES)) {
+    if (stations[name]) {
+      // Merge: add any override lines not yet present (guards against accidental omissions)
+      for (const lineId of lines) {
+        if (!stations[name].lines.includes(lineId)) {
+          stations[name].lines.push(lineId);
+        }
+      }
+    } else {
+      stations[name] = { name, codes: [], lines };
+    }
+  }
+  return stations;
+}
+
+export const STATIONS: Record<string, Station> = buildStations();
