@@ -1,4 +1,7 @@
-import type { MrtLine } from './types';
+import type { MrtLine, Station } from './types';
+
+/** Populated in Ticket 03 (03: Migrate all existing lines to new data model). */
+export const STATIONS: Record<string, Station> = {};
 
 export const MRT_LINES: MrtLine[] = [
   {
