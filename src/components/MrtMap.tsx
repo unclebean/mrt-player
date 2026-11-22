@@ -13,42 +13,35 @@ export const MrtMap: React.FC<MrtMapProps> = ({ trains }) => {
   const isDragging = useRef(false);
   const lastPan = useRef({ x: 0, y: 0 });
 
-  // Calculate train positions based on path and progress
   useEffect(() => {
     const newPositions: Record<string, { x: number, y: number }> = {};
-    
+
     trains.forEach(train => {
-      const pathEl = pathRefs.current[train.lineId];
+      const pathEl = pathRefs.current[train.serviceId];
       if (pathEl) {
         const totalLength = pathEl.getTotalLength();
         const p1 = pathEl.getPointAtLength(train.progress * totalLength);
-        
-        // Calculate tangent for 2-way track offset
+
         const delta = 0.5;
         const p2 = pathEl.getPointAtLength(Math.min(totalLength, Math.max(0, train.progress * totalLength + delta)));
-        
         let dx = p2.x - p1.x;
         let dy = p2.y - p1.y;
-        
+
         if (dx === 0 && dy === 0) {
-           const p0 = pathEl.getPointAtLength(Math.max(0, train.progress * totalLength - delta));
-           dx = p1.x - p0.x;
-           dy = p1.y - p0.y;
+          const p0 = pathEl.getPointAtLength(Math.max(0, train.progress * totalLength - delta));
+          dx = p1.x - p0.x;
+          dy = p1.y - p0.y;
         }
 
         const len = Math.sqrt(dx * dx + dy * dy) || 1;
-        const tx = dx / len;
-        const ty = dy / len;
+        const nx = -(dy / len);
+        const ny = dx / len;
+        const offset = 6;
 
-        // Normal vector (-ty, tx)
-        const nx = -ty;
-        const ny = tx;
-
-        const offset = 6; // 6 pixels offset from center
-        const finalX = p1.x + nx * offset * train.direction;
-        const finalY = p1.y + ny * offset * train.direction;
-
-        newPositions[train.id] = { x: finalX, y: finalY };
+        newPositions[train.id] = {
+          x: p1.x + nx * offset * train.direction,
+          y: p1.y + ny * offset * train.direction,
+        };
       }
     });
 
@@ -68,19 +61,22 @@ export const MrtMap: React.FC<MrtMapProps> = ({ trains }) => {
     setTransform(prev => ({ ...prev, x: prev.x + dx, y: prev.y + dy }));
   };
 
-  const handleMouseUp = () => {
-    isDragging.current = false;
-  };
+  const handleMouseUp = () => { isDragging.current = false; };
 
   const handleWheel = (e: React.WheelEvent) => {
-    setTransform(prev => {
-      const newScale = Math.min(Math.max(0.3, prev.scale - e.deltaY * 0.002), 5);
-      return { ...prev, scale: newScale };
-    });
+    setTransform(prev => ({
+      ...prev,
+      scale: Math.min(Math.max(0.3, prev.scale - e.deltaY * 0.002), 5)
+    }));
   };
 
+  // Collect all services across all lines
+  const allServices = MRT_LINES.flatMap(line =>
+    line.services.map(service => ({ line, service }))
+  );
+
   return (
-    <div 
+    <div
       className="map-container"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
@@ -89,41 +85,43 @@ export const MrtMap: React.FC<MrtMapProps> = ({ trains }) => {
       onWheel={handleWheel}
       style={{ cursor: isDragging.current ? 'grabbing' : 'grab' }}
     >
-      <svg 
-        className="mrt-map" 
-        viewBox="-800 0 3500 1600" 
+      <svg
+        className="mrt-map"
+        viewBox="-800 0 3500 1600"
         preserveAspectRatio="xMidYMid meet"
-        style={{ transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`, transformOrigin: 'center' }}
+        style={{
+          transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`,
+          transformOrigin: 'center'
+        }}
       >
         {/* Draw Lines */}
-        {MRT_LINES.map(line => (
+        {allServices.map(({ line, service }) => (
           <path
-            key={line.id}
-            ref={el => { pathRefs.current[line.id] = el; }}
-            d={line.path}
+            key={service.id}
+            ref={el => { pathRefs.current[service.id] = el; }}
+            d={service.path}
             className="line-path"
             stroke={line.colorVar}
           />
         ))}
 
-        {/* Draw Stations and Names (De-duplicated) */}
+        {/* Draw Stations (de-duplicated by name) */}
         {(() => {
-          const uniqueStations: Record<string, { x: number, y: number, colors: string[], codes: string[] }> = {};
-          
-          MRT_LINES.forEach(line => {
-            const pathEl = pathRefs.current[line.id];
+          const uniqueStations: Record<string, { x: number, y: number, colors: string[] }> = {};
+
+          allServices.forEach(({ line, service }) => {
+            const pathEl = pathRefs.current[service.id];
             if (!pathEl) return;
             const length = pathEl.getTotalLength();
             if (length === 0) return;
 
-            line.stations.forEach(station => {
-              const pt = pathEl.getPointAtLength(station.progress * length);
-              if (!uniqueStations[station.name]) {
-                uniqueStations[station.name] = { x: pt.x, y: pt.y, colors: [line.colorVar], codes: [station.code] };
+            Object.entries(service.stationProgresses).forEach(([name, progress]) => {
+              const pt = pathEl.getPointAtLength(progress * length);
+              if (!uniqueStations[name]) {
+                uniqueStations[name] = { x: pt.x, y: pt.y, colors: [line.colorVar] };
               } else {
-                if (!uniqueStations[station.name].colors.includes(line.colorVar)) {
-                  uniqueStations[station.name].colors.push(line.colorVar);
-                  if (station.code) uniqueStations[station.name].codes.push(station.code);
+                if (!uniqueStations[name].colors.includes(line.colorVar)) {
+                  uniqueStations[name].colors.push(line.colorVar);
                 }
               }
             });
@@ -154,7 +152,7 @@ export const MrtMap: React.FC<MrtMapProps> = ({ trains }) => {
                 y={data.y + 4}
                 className="station-name"
               >
-                {data.codes.join(' ')}
+                {name}
               </text>
             </g>
           ));
@@ -164,7 +162,6 @@ export const MrtMap: React.FC<MrtMapProps> = ({ trains }) => {
         {trains.map(train => {
           const pos = trainPositions[train.id];
           if (!pos) return null;
-          
           return (
             <circle
               key={train.id}

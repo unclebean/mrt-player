@@ -1,4 +1,3 @@
-
 import { useSimulation } from './hooks/useSimulation';
 import { MrtMap } from './components/MrtMap';
 import { ControlPanel } from './components/ControlPanel';
@@ -10,10 +9,10 @@ function App() {
   return (
     <div className="app-container">
       <MrtMap trains={trains} />
-      <ControlPanel 
-        trains={trains} 
-        onAddTrain={addTrain} 
-        onRemoveTrain={removeTrain} 
+      <ControlPanel
+        trains={trains}
+        onAddTrain={addTrain}
+        onRemoveTrain={removeTrain}
       />
     </div>
   );
